@@ -1,7 +1,12 @@
 import React from 'react'
+import { Dashboard, DashboardMenu, DashboardButtom } from '../../components'
 
 const HomePage = () => (
-    <h1>Olá mundo cruel.</h1>
+  <Dashboard>
+    <DashboardMenu title="Jogo da Mémoria">
+      <DashboardButtom>INICIAR JOGO</DashboardButtom>
+    </DashboardMenu>
+  </Dashboard>
 )
 
 export default HomePage;
