@@ -3,21 +3,28 @@ import React from 'react';
 import { Board, Card } from '../../components';
 import { connect } from 'react-redux';
 
-const GamePage = ({ isActive, onCardClick }) => {
+const GamePage = ({ cards, onCardClick }) => {
   return (
     <Board>
-      <Card name="Test card" isActive={isActive} onClick={onCardClick} />
+      {cards.map(card =>
+        <Card
+          key={card.key}
+          name={card.name}
+          isActive={card.isActive}
+          onClick={() => { onCardClick(card) }}
+        />
+      )}
     </Board>
   );
 }
 
 const mapStateToProps = state => ({
-  isActive: state.isActive
+  cards: state.cards
 })
 
 const mapDispatchToProps = dispatch => ({
-  onCardClick: () => {
-    dispatch({ type: "SELECT_CARD" })
+  onCardClick: card => {
+    dispatch({ type: "SELECT_CARD", key: card.key })
   }
 })
 
