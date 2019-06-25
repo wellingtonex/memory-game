@@ -1,4 +1,5 @@
 import { createStore } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 
 const gameReducer = (state = { isActive: false }, action) => {
@@ -13,6 +14,6 @@ const gameReducer = (state = { isActive: false }, action) => {
   }
 }
 
-const store = createStore(gameReducer);
+const store = createStore(gameReducer, composeWithDevTools());
 
 export default store;
