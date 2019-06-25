@@ -1,30 +1,24 @@
-import React, { Component } from 'react';
+import React from 'react';
+
 import { Board, Card } from '../../components';
+import { connect } from 'react-redux';
 
-// const GamePage = () => {
-//   return (
-//     <Board>
-//       <Card name="Test card" isActive="true" />
-//     </Board>
-//   );
-// }
-
-class GamePage extends Component {
-  state = { isActive: false }
-
-  handleCardClick = () => {
-    this.setState(prevState => ({
-      isActive: !prevState.isActive
-    }))
-  }
-
-  render() {
-    return (
-      <Board>
-        <Card name="Test card" isActive={this.state.isActive} onClick={this.handleCardClick} />
-      </Board>
-    );
-  }
+const GamePage = ({ isActive, onCardClick }) => {
+  return (
+    <Board>
+      <Card name="Test card" isActive={isActive} onClick={onCardClick} />
+    </Board>
+  );
 }
 
-export default GamePage;
+const mapStateToProps = state => ({
+  isActive: state.isActive
+})
+
+const mapDispatchToProps = dispatch => ({
+  onCardClick: () => {
+    dispatch({ type: "SELECT_CARD" })
+  }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(GamePage);
