@@ -1,30 +1,49 @@
-import React from 'react';
+import React from "react";
+import { connect } from "react-redux";
 
-import { Board, Card } from '../../components';
-import { connect } from 'react-redux';
-import { selectCard } from '../../store/actions'
+import { Board, Card, VictoryDialog } from "../../components";
+import { selectCard, closeVictoryDialog, startGame } from "../../store/actions";
 
-const GamePage = ({ cards, onCardClick }) => {
-  return (
+const GamePage = ({
+  cards,
+  onCardClick,
+  isVictoryDialogOpen,
+  onCloseVictoryDialog,
+  onStartGame
+}) => (
+  <>
     <Board>
-      {cards.map(card =>
+      {cards.map(card => (
         <Card
           key={card.key}
           name={card.name}
           isActive={card.isActive}
-          onClick={() => { onCardClick(card.key) }}
+          onClick={() => {
+            onCardClick(card.key);
+          }}
         />
-      )}
+      ))}
     </Board>
-  );
-}
+    <VictoryDialog
+      isOpen={isVictoryDialogOpen}
+      onClose={onCloseVictoryDialog}
+      onGameRestart={onStartGame}
+    />
+  </>
+);
 
 const mapStateToProps = state => ({
-  cards: state.cards
-})
+  cards: state.cards,
+  isVictoryDialogOpen: state.isVictoryDialogOpen
+});
 
 const mapDispatchToProps = {
-  onCardClick: selectCard
-}
+  onCardClick: selectCard,
+  onCloseVictoryDialog: closeVictoryDialog,
+  onStartGame: startGame
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(GamePage);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(GamePage);
