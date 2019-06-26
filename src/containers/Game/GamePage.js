@@ -2,6 +2,7 @@ import React from 'react';
 
 import { Board, Card } from '../../components';
 import { connect } from 'react-redux';
+import { selectCard } from '../../store/actions'
 
 const GamePage = ({ cards, onCardClick }) => {
   return (
@@ -11,7 +12,7 @@ const GamePage = ({ cards, onCardClick }) => {
           key={card.key}
           name={card.name}
           isActive={card.isActive}
-          onClick={() => { onCardClick(card) }}
+          onClick={() => { onCardClick(card.key) }}
         />
       )}
     </Board>
@@ -22,10 +23,8 @@ const mapStateToProps = state => ({
   cards: state.cards
 })
 
-const mapDispatchToProps = dispatch => ({
-  onCardClick: card => {
-    dispatch({ type: "SELECT_CARD", key: card.key })
-  }
-})
+const mapDispatchToProps = {
+  onCardClick: selectCard
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(GamePage);
