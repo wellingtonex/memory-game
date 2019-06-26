@@ -1,16 +1,10 @@
 import { LOCK, OPEN_CARD, SET_MATCH, CLOSE_CARDS } from './actions';
+import ListBuild from '../builders/ListBuilder'
 
 
 const initialState = {
   isLocked: false,
-  cards: [
-    { id: 1, key: 1, name: "Carta 1", isActive: false, hasMatch: false },
-    { id: 2, key: 2, name: "Carta 2", isActive: false, hasMatch: false },
-    { id: 3, key: 3, name: "Carta 3", isActive: false, hasMatch: false },
-    { id: 1, key: 4, name: "Carta 1", isActive: false, hasMatch: false },
-    { id: 2, key: 5, name: "Carta 2", isActive: false, hasMatch: false },
-    { id: 3, key: 6, name: "Carta 3", isActive: false, hasMatch: false }
-  ]
+  cards: new ListBuild().createList(3).build()
 };
 
 const gameReducer = (state = initialState, action) => {
