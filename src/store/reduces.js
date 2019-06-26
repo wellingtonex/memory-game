@@ -4,7 +4,7 @@ import ListBuild from '../builders/ListBuilder'
 
 const initialState = {
   isLocked: false,
-  cards: new ListBuild().createList(3).build()
+  cards: new ListBuild().createList(3).shuffle().build()
 };
 
 const gameReducer = (state = initialState, action) => {
